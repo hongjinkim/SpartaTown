@@ -7,21 +7,31 @@ using TMPro;
 using System.Linq;
 using System;
 
-public class InputWindow : MonoBehaviour
+public class StartSceneManager : MonoBehaviour
 {
-    private TMP_InputField inputField;
+    public TMP_InputField inputField;
+    public GameObject characterSelectWindow;
+    public CharacterSelectButton characterSelectButton;
 
     [SerializeField] private string playerName;
 
     private void Awake()
     {
-        inputField = transform.Find("InputField").GetComponent<TMP_InputField>();
+        characterSelectWindow.SetActive(false);
+        PlayerPrefs.SetInt("character_index", 0);
     }
 
     public void OnJoinButtonClicked()
     {
         if(SetName())
+        {
             SceneManager.LoadScene("MainScene");
+        }
+            
+    }
+    public void OnCharacterSelectButtonClicked()
+    {
+        characterSelectWindow.SetActive(true);
     }
 
     public bool SetName()
@@ -34,6 +44,13 @@ public class InputWindow : MonoBehaviour
         }
         else
             return false;
+    }
+    public void SetCharacter(int idx)
+    {
+        PlayerPrefs.SetInt("character_index", idx);
+        characterSelectWindow.SetActive(false);
+
+        characterSelectButton.UpdateProfileImage(idx);
     }
 
 }

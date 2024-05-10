@@ -8,11 +8,11 @@ using System;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField]private TMP_Text playerName;
+    private TMP_Text playerName;
 
     private void Awake()
-    { 
-       
+    {
+        playerName = GetComponentInChildren<TMP_Text>();
     }
 
     void Start()
