@@ -15,6 +15,8 @@ public class TopDownMovement : MonoBehaviour
     private Vector2 mouseDirection = Vector2.zero;
     private Animator animator;
 
+    public float movementSpeed = 10f;
+
     [SerializeField] private SpriteRenderer characterRenderer;
 
     private void Awake()
@@ -52,11 +54,9 @@ public class TopDownMovement : MonoBehaviour
 
     private void ApplyMovement(Vector2 direction)
     {
-        direction = direction * 5;
+        direction = direction * movementSpeed;
 
         movementRigidbody.velocity = direction;
-
-        animator.SetFloat("Movement", Math.Abs(direction.x) + Math.Abs(direction.y));
     }
 
     private void Rotate(Vector2 direction)
